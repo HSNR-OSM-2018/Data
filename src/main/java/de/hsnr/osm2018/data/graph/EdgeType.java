@@ -14,5 +14,6 @@ public enum EdgeType {
     LIVING_STREET,
     RESIDENTIAL,
     UNCLASSIFIED,
-    SERVICE
+    SERVICE,
+    UNKNOWN
 }

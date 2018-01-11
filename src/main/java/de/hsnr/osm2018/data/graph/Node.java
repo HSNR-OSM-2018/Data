@@ -31,4 +31,9 @@ public class Node {
     public List<Edge> getEdges() {
         return mEdges;
     }
+
+    @Override
+    public String toString() {
+        return "NodeID: " + mId + "\n\tLat/Lng: " + mLatitude + "/" + mLongitude;
+    }
 }
