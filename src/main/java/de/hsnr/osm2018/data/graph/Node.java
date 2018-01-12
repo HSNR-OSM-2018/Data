@@ -36,6 +36,10 @@ public class Node {
         return mEdges;
     }
 
+    public void addEdge(Edge e){
+        this.mEdges.add(e);
+    }
+
     public double getD() {
         return d;
     }
