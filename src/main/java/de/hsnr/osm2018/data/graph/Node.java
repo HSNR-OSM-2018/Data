@@ -8,12 +8,16 @@ public class Node {
     private double mLatitude;
     private double mLongitude;
     private List<Edge> mEdges;
+    private double d; // Node weight
+    private double f; // Node weight with heuristik
+    private Node parent;
 
     public Node(long id, double latitude, double longitude, List<Edge> edges) {
         this.mId = id;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
         this.mEdges = edges;
+        this.d = Double.POSITIVE_INFINITY;
     }
 
     public long getId() {
@@ -30,6 +34,30 @@ public class Node {
 
     public List<Edge> getEdges() {
         return mEdges;
+    }
+
+    public double getD() {
+        return d;
+    }
+
+    public double getF() {
+        return f;
+    }
+
+    public void setD(double d) {
+        this.d = d;
+    }
+
+    public void setF(double f) {
+        this.f = f;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 
     @Override
