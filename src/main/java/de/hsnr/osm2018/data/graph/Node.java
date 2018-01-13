@@ -1,34 +1,38 @@
 package de.hsnr.osm2018.data.graph;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
 
-    private long mId;
-    private double mLatitude;
-    private double mLongitude;
+    private Long mId;
+    private Double mLatitude;
+    private Double mLongitude;
     private List<Edge> mEdges;
-    private double d; // Node weight
-    private double f; // Node weight with heuristik
+    private double d = Double.POSITIVE_INFINITY; // Node weight
+    private double f; // Node weight with heuristic
     private Node parent;
 
-    public Node(long id, double latitude, double longitude, List<Edge> edges) {
+    public Node(Long id, Double latitude, Double longitude) {
+        this(id, latitude, longitude, new ArrayList<>());
+    }
+
+    public Node(Long id, Double latitude, Double longitude, List<Edge> edges) {
         this.mId = id;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
         this.mEdges = edges;
-        this.d = Double.POSITIVE_INFINITY;
     }
 
-    public long getId() {
+    public Long getId() {
         return mId;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return mLatitude;
     }
 
-    public double getLongitute() {
+    public Double getLongitude() {
         return mLongitude;
     }
 
@@ -36,15 +40,15 @@ public class Node {
         return mEdges;
     }
 
-    public void addEdge(Edge e){
+    public void addEdge(Edge e) {
         this.mEdges.add(e);
     }
 
-    public double getD() {
+    public Double getD() {
         return d;
     }
 
-    public double getF() {
+    public Double getF() {
         return f;
     }
 
@@ -62,6 +66,14 @@ public class Node {
 
     public void setParent(Node parent) {
         this.parent = parent;
+    }
+
+    public Double getDistance(Double latitude, Double longitude) {
+        return Math.sqrt(Math.pow(getLatitude() - latitude, 2) + Math.pow(getLongitude() - longitude, 2));
+    }
+
+    public Double getDistance(Node node) {
+        return getDistance(node.getLatitude(), node.getLongitude());
     }
 
     @Override

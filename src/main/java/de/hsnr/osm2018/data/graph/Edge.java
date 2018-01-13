@@ -3,14 +3,14 @@ package de.hsnr.osm2018.data.graph;
 public class Edge {
 
     private Node mStartNode;
-    private Node mDestinationNode;
+    private Long mDestinationNodeId;
     private Integer mLength;
     private Short mSpeed;
     private EdgeType mType;
 
-    public Edge(Node startNode, Node destinationNode, Integer length, Short speed, EdgeType type) {
+    public Edge(Node startNode, Long destinationNodeId, Integer length, Short speed, EdgeType type) {
         this.mStartNode = startNode;
-        this.mDestinationNode = destinationNode;
+        this.mDestinationNodeId = destinationNodeId;
         this.mLength = length;
         this.mSpeed = speed;
         this.mType = type;
@@ -20,8 +20,12 @@ public class Edge {
         return mStartNode;
     }
 
-    public Node getDestinationNode() {
-        return mDestinationNode;
+    public Long getDestinationNodeId() {
+        return mDestinationNodeId;
+    }
+
+    public Node getDestinationNode(Graph graph) {
+        return graph.getNode(mDestinationNodeId);
     }
 
     /* length in meters */
@@ -40,6 +44,6 @@ public class Edge {
 
     @Override
     public String toString() {
-        return "Edge:\n{\n\tStartNode: " + this.getStartNode() + ",\n\tEndNode: " + this.getDestinationNode() + ",\n\tWith MaxSpeed: " + this.getSpeed() + ",\n\tWithLength: " + this.getLength() + ",\n\tWith EdgeType: " + this.getType();
+        return "Edge:\n{\n\tStartNode: " + this.getStartNode() + ",\n\tEndNode: " + this.getDestinationNodeId() + ",\n\tWith MaxSpeed: " + this.getSpeed() + ",\n\tWithLength: " + this.getLength() + ",\n\tWith EdgeType: " + this.getType();
     }
 }
