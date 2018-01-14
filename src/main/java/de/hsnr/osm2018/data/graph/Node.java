@@ -5,6 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class Node {
@@ -12,7 +14,7 @@ public class Node {
     private Long mId;
     private Double mLatitude;
     private Double mLongitude;
-    private List<Edge> mEdges;
+    private HashMap<Long, Edge> mEdges;
     private double d = Double.POSITIVE_INFINITY; // Node weight
     private double f; // Node weight with heuristic
     private Node parent;
@@ -25,7 +27,10 @@ public class Node {
         this.mId = id;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
-        this.mEdges = edges;
+        this.mEdges = new HashMap<>();
+        for (Edge edge : edges) {
+            addEdge(edge);
+        }
     }
 
     public Long getId() {
@@ -40,12 +45,19 @@ public class Node {
         return mLongitude;
     }
 
-    public List<Edge> getEdges() {
-        return mEdges;
+    public Collection<Edge> getEdges() {
+        return mEdges.values();
     }
 
-    public void addEdge(Edge e) {
-        this.mEdges.add(e);
+    public void addEdge(Edge edge) {
+        if (mEdges.containsKey(edge.getDestinationNodeId())) {
+            return; //TODO: throw an exception or handle it differently?
+        }
+        mEdges.put(edge.getDestinationNodeId(), edge);
+    }
+
+    public void addEdge(Long destinationNodeId, Integer length, Short speed, EdgeType type) {
+        addEdge(new Edge(this, destinationNodeId, length, speed, type));
     }
 
     public Double getD() {

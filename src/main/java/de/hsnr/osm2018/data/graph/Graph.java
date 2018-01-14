@@ -4,8 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 public class Graph {
 
@@ -31,15 +31,22 @@ public class Graph {
         return mNodes.containsKey(node.getId());
     }
 
+    public boolean contains(Long id) {
+        return mNodes.containsKey(id);
+    }
+
     public void add(Node node) {
+        if (mNodes.containsKey(node.getId())) {
+            return; //TODO: throw an exception or handle it differently?
+        }
         mNodes.put(node.getId(), node);
     }
 
-    public List<Edge> getEdges(Long nodeId) {
+    public Collection<Edge> getEdges(Long nodeId) {
         return getNode(nodeId).getEdges();
     }
 
-    public List<Edge> getEdges(Node node) {
+    public Collection<Edge> getEdges(Node node) {
         return getEdges(node.getId());
     }
 
