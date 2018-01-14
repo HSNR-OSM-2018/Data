@@ -1,5 +1,8 @@
 package de.hsnr.osm2018.data.graph;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Edge {
 
     private Node mStartNode;
@@ -40,6 +43,16 @@ public class Edge {
 
     public EdgeType getType() {
         return mType;
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject data = new JSONObject();
+        data.put("start", getStartNode().getId());
+        data.put("destination", getDestinationNodeId());
+        data.put("length", getLength());
+        data.put("speed", getSpeed());
+        data.put("type", getType().getName());
+        return data;
     }
 
     @Override

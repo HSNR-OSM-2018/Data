@@ -1,5 +1,9 @@
 package de.hsnr.osm2018.data.graph;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,5 +41,18 @@ public class Graph {
 
     public List<Edge> getEdges(Node node) {
         return getEdges(node.getId());
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject data = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        long count = 0L;
+        for (Node node : mNodes.values()) {
+            nodes.put(node.toJSON());
+            count++;
+        }
+        data.put("nodes", nodes);
+        data.put("count", count);
+        return data;
     }
 }

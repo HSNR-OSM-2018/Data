@@ -12,4 +12,12 @@
     <groupId>de.hsnr.osm2018</groupId>
     <artifactId>osm-data</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20171018</version>
+        </dependency>
+    </dependencies>
 </project>

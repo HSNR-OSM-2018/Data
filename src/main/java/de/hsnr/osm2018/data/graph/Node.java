@@ -1,5 +1,9 @@
 package de.hsnr.osm2018.data.graph;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,6 +78,19 @@ public class Node {
 
     public Double getDistance(Node node) {
         return getDistance(node.getLatitude(), node.getLongitude());
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject data = new JSONObject();
+        data.put("id", getId());
+        data.put("latitude", getLatitude());
+        data.put("longitude", getLongitude());
+        JSONArray edges = new JSONArray();
+        for (Edge edge : getEdges()) {
+            edges.put(edge.toJSON());
+        }
+        data.put("edges", edges);
+        return data;
     }
 
     @Override
