@@ -4,11 +4,11 @@ public class Edge {
 
     private Node mStartNode;
     private Node mDestinationNode;
-    private Integer mLength;
-    private Short mSpeed;
+    private int mLength;
+    private short mSpeed;
     private EdgeType mType;
 
-    public Edge(Node startNode, Node destinationNode, Integer length, Short speed, EdgeType type) {
+    public Edge(Node startNode, Node destinationNode, int length, short speed, EdgeType type) {
         this.mStartNode = startNode;
         this.mDestinationNode = destinationNode;
         this.mLength = length;
@@ -26,12 +26,12 @@ public class Edge {
 
     /* length in meters */
     public int getLength() {
-        return mLength != null ? mLength : -1;
+        return mLength;
     }
 
     /* speed in kilometers per hour */
     public short getSpeed() {
-        return mSpeed != null ? mSpeed : -1;
+        return mSpeed;
     }
 
     public EdgeType getType() {
