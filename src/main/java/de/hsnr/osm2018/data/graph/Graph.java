@@ -1,22 +1,65 @@
 package de.hsnr.osm2018.data.graph;
 
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 public class Graph {
 
-    private List<Node> mNodes;
-    private List<Edge> mEdges;
+    private HashMap<Long, Node> mNodes;
 
-    public Graph(List<Node> nodes, List<Edge> edges) {
-        this.mNodes = nodes;
-        this.mEdges = edges;
+    public Graph() {
+        this.mNodes = new HashMap<>();
     }
 
-    public List<Node> getNodes() {
+    public Graph(HashMap<Long, Node> nodes) {
+        this.mNodes = nodes;
+    }
+
+    public HashMap<Long, Node> getNodes() {
         return mNodes;
     }
 
-    public List<Edge> getEdges() {
-        return mEdges;
+    public Node getNode(Long id) {
+        return mNodes.get(id);
+    }
+
+    public boolean contains(Node node) {
+        return mNodes.containsKey(node.getId());
+    }
+
+    public boolean contains(Long id) {
+        return mNodes.containsKey(id);
+    }
+
+    public void add(Node node) {
+        if (mNodes.containsKey(node.getId())) {
+            return; //TODO: throw an exception or handle it differently?
+        }
+        mNodes.put(node.getId(), node);
+    }
+
+    public Collection<Edge> getEdges(Long nodeId) {
+        return getNode(nodeId).getEdges();
+    }
+
+    public Collection<Edge> getEdges(Node node) {
+        return getEdges(node.getId());
+    }
+
+    public JSONObject toJSON() throws JSONException {
+        JSONObject data = new JSONObject();
+        JSONArray nodes = new JSONArray();
+        long count = 0L;
+        for (Node node : mNodes.values()) {
+            nodes.put(node.toJSON());
+            count++;
+        }
+        data.put("nodes", nodes);
+        data.put("count", count);
+        return data;
     }
 }

@@ -8,34 +8,35 @@ public class EdgeTypeUtils {
         if(osmTagName == null) {
             return EdgeType.UNKNOWN;
         }
-        if(osmTagName.equals("motorway")) {
-            return EdgeType.MOTORWAY;
-        } else if(osmTagName.equals("motorway_link")) {
-            return EdgeType.MOTORWAY_LINK;
-        } else if(osmTagName.equals("living_street")) {
-            return EdgeType.LIVING_STREET;
-        } else if(osmTagName.equals("primary")) {
-            return EdgeType.PRIMARY;
-        } else if(osmTagName.equals("primary_link")) {
-            return EdgeType.PRIMARY_LINK;
-        } else if(osmTagName.equals("residential")) {
-            return EdgeType.RESIDENTIAL;
-        } else if(osmTagName.equals("secondary")) {
-            return EdgeType.SECONDARY;
-        } else if(osmTagName.equals("secondary_link")) {
-            return EdgeType.SECONDARY_LINK;
-        } else if(osmTagName.equals("teritiary")) {
-            return EdgeType.TERTIARY;
-        } else if(osmTagName.equals("teritiary_link")) {
-            return EdgeType.TERTIARY_LINK;
-        } else if(osmTagName.equals("trunk")) {
-            return EdgeType.TRUNK;
-        } else if(osmTagName.equals("trunk_link")) {
-            return EdgeType.TRUNK_LINK;
-        } else if(osmTagName.equals("service")) {
-            return EdgeType.SERVICE;
-        } else if(osmTagName.equals("unclassified")) {
-            return EdgeType.UNCLASSIFIED;
+        switch (osmTagName) {
+            case "motorway":
+                return EdgeType.MOTORWAY;
+            case "motorway_link":
+                return EdgeType.MOTORWAY_LINK;
+            case "living_street":
+                return EdgeType.LIVING_STREET;
+            case "primary":
+                return EdgeType.PRIMARY;
+            case "primary_link":
+                return EdgeType.PRIMARY_LINK;
+            case "residential":
+                return EdgeType.RESIDENTIAL;
+            case "secondary":
+                return EdgeType.SECONDARY;
+            case "secondary_link":
+                return EdgeType.SECONDARY_LINK;
+            case "teritiary":
+                return EdgeType.TERTIARY;
+            case "teritiary_link":
+                return EdgeType.TERTIARY_LINK;
+            case "trunk":
+                return EdgeType.TRUNK;
+            case "trunk_link":
+                return EdgeType.TRUNK_LINK;
+            case "service":
+                return EdgeType.SERVICE;
+            case "unclassified":
+                return EdgeType.UNCLASSIFIED;
         }
         return EdgeType.UNKNOWN;
     }
