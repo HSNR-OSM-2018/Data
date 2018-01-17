@@ -15,6 +15,16 @@ public class NodeContainer {
         return mNode;
     }
 
+    public long getId() { return mNode.getId(); }
+
+    public double getLatitude() {
+        return mNode.getLatitude();
+    }
+
+    public double getLongitude() {
+        return mNode.getLongitude();
+    }
+
     public double getD() {
         return d;
     }
