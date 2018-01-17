@@ -6,14 +6,14 @@ import org.json.JSONObject;
 public class Edge {
 
     private Node mStartNode;
-    private Long mDestinationNodeId;
-    private Integer mLength;
-    private Short mSpeed;
+    private Node mDestinationNode;
+    private int mLength;
+    private short mSpeed;
     private EdgeType mType;
 
-    public Edge(Node startNode, Long destinationNodeId, Integer length, Short speed, EdgeType type) {
+    public Edge(Node startNode, Node destinationNode, int length, short speed, EdgeType type) {
         this.mStartNode = startNode;
-        this.mDestinationNodeId = destinationNodeId;
+        this.mDestinationNode = destinationNode;
         this.mLength = length;
         this.mSpeed = speed;
         this.mType = type;
@@ -23,22 +23,18 @@ public class Edge {
         return mStartNode;
     }
 
-    public Long getDestinationNodeId() {
-        return mDestinationNodeId;
-    }
-
-    public Node getDestinationNode(Graph graph) {
-        return graph.getNode(mDestinationNodeId);
+    public Node getDestinationNode() {
+        return mDestinationNode;
     }
 
     /* length in meters */
     public int getLength() {
-        return mLength != null ? mLength : -1;
+        return mLength;
     }
 
     /* speed in kilometers per hour */
     public short getSpeed() {
-        return mSpeed != null ? mSpeed : -1;
+        return mSpeed;
     }
 
     public EdgeType getType() {
@@ -48,7 +44,7 @@ public class Edge {
     public JSONObject toJSON() throws JSONException {
         JSONObject data = new JSONObject();
         data.put("start", getStartNode().getId());
-        data.put("destination", getDestinationNodeId());
+        data.put("destination", getDestinationNode().getId());
         data.put("length", getLength());
         data.put("speed", getSpeed());
         data.put("type", getType().getName());
@@ -57,6 +53,6 @@ public class Edge {
 
     @Override
     public String toString() {
-        return "Edge:\n{\n\tStartNode: " + this.getStartNode() + ",\n\tEndNode: " + this.getDestinationNodeId() + ",\n\tWith MaxSpeed: " + this.getSpeed() + ",\n\tWithLength: " + this.getLength() + ",\n\tWith EdgeType: " + this.getType();
+        return "Edge:\n{\n\tStartNode: " + this.getStartNode() + ",\n\tEndNode: " + this.getDestinationNode() + ",\n\tWith MaxSpeed: " + this.getSpeed() + ",\n\tWithLength: " + this.getLength() + ",\n\tWith EdgeType: " + this.getType();
     }
 }
