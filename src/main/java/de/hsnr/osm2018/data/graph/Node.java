@@ -40,8 +40,8 @@ public class Node {
         mEdges.add(edge);
     }
 
-    public void addEdge(long destinationNodeId, int length, short speed, EdgeType type) {
-        addEdge(new Edge(this, destinationNodeId, length, speed, type));
+    public void addEdge(Node destination, int length, short speed, EdgeType type) {
+        addEdge(new Edge(this, destination, length, speed, type));
     }
 
     public double getDistance(double latitude, double longitude) {

@@ -36,8 +36,8 @@ public class FilteredDataProvider extends SimpleDataProvider {
         }
         for (Node node : subset.getNodes().values()) {
             for (Edge edge : mGraph.getNode(node.getId()).getEdges()) {
-                if (subset.contains(edge.getDestinationNodeId())) {
-                    node.addEdge(new Edge(node, edge.getDestinationNodeId(), edge.getLength(), edge.getSpeed(), edge.getType()));
+                if (subset.contains(edge.getDestinationNode().getId())) {
+                    node.addEdge(new Edge(node, edge.getDestinationNode(), edge.getLength(), edge.getSpeed(), edge.getType()));
                 }
             }
         }
@@ -48,8 +48,8 @@ public class FilteredDataProvider extends SimpleDataProvider {
         }
         for (Node node : subset.getNodes().values()) {
             for (Edge edge : mGraph.getNode(node.getId()).getEdges()) {
-                if (subset.contains(edge.getDestinationNodeId()) && edge.getType().isHighSpeed()) {
-                    node.addEdge(new Edge(node, edge.getDestinationNodeId(), edge.getLength(), edge.getSpeed(), edge.getType()));
+                if (subset.contains(edge.getDestinationNode().getId()) && edge.getType().isHighSpeed()) {
+                    node.addEdge(new Edge(node, edge.getDestinationNode(), edge.getLength(), edge.getSpeed(), edge.getType()));
                 }
             }
         }
@@ -82,8 +82,8 @@ public class FilteredDataProvider extends SimpleDataProvider {
         }
         for (Node node : subset.getNodes().values()) {
             for (Edge edge : mGraph.getNode(node.getId()).getEdges()) {
-                if (subset.contains(edge.getDestinationNodeId())) {
-                    node.addEdge(new Edge(node, edge.getDestinationNodeId(), edge.getLength(), edge.getSpeed(), edge.getType()));
+                if (subset.contains(edge.getDestinationNode().getId())) {
+                    node.addEdge(new Edge(node, edge.getDestinationNode(), edge.getLength(), edge.getSpeed(), edge.getType()));
                 }
             }
         }
@@ -108,8 +108,8 @@ public class FilteredDataProvider extends SimpleDataProvider {
         }
         for (Node node : subset.getNodes().values()) {
             for (Edge edge : mGraph.getNode(node.getId()).getEdges()) {
-                if (subset.contains(edge.getDestinationNodeId())) {
-                    node.addEdge(new Edge(node, edge.getDestinationNodeId(), edge.getLength(), edge.getSpeed(), edge.getType()));
+                if (subset.contains(edge.getDestinationNode().getId())) {
+                    node.addEdge(new Edge(node, edge.getDestinationNode(), edge.getLength(), edge.getSpeed(), edge.getType()));
                 }
             }
         }
