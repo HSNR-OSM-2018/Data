@@ -1,5 +1,7 @@
 package de.hsnr.osm2018.data.graph;
 
+import java.util.ArrayList;
+
 public class NodeContainer {
 
     private Node mNode;
@@ -23,6 +25,10 @@ public class NodeContainer {
 
     public double getLongitude() {
         return mNode.getLongitude();
+    }
+
+    public ArrayList<Edge> getEdges() {
+        return mNode.getEdges();
     }
 
     public double getD() {
