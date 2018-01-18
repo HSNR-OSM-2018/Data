@@ -65,10 +65,6 @@ public class Node {
         return data;
     }
 
-    public void addEdge(Edge edge) {
-        this.mEdges.add(edge);
-    }
-
     @Override
     public String toString() {
         return "NodeID: " + mId + "\n\tLat/Lng: " + mLatitude + "/" + mLongitude;
