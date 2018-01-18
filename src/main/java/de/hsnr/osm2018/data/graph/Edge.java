@@ -1,5 +1,6 @@
 package de.hsnr.osm2018.data.graph;
 
+import de.hsnr.osm2018.data.utils.OSMMaxSpeedUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,8 +16,12 @@ public class Edge {
         this.mStartNode = startNode;
         this.mDestinationNode = destinationNode;
         this.mLength = length;
-        this.mSpeed = speed;
         this.mType = type;
+        if(speed == 0) {
+            this.mSpeed = OSMMaxSpeedUtils.evaluateMaxSpeedByEdgeType(this.mType);
+        } else {
+            this.mSpeed = speed;
+        }
     }
 
     public Node getStartNode() {
