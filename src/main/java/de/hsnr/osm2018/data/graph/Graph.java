@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Graph {
@@ -23,7 +23,7 @@ public class Graph {
         return mNodes;
     }
 
-    public Node getNode(Long id) {
+    public Node getNode(long id) {
         return mNodes.get(id);
     }
 
@@ -31,7 +31,7 @@ public class Graph {
         return mNodes.containsKey(node.getId());
     }
 
-    public boolean contains(Long id) {
+    public boolean contains(long id) {
         return mNodes.containsKey(id);
     }
 
@@ -42,11 +42,11 @@ public class Graph {
         mNodes.put(node.getId(), node);
     }
 
-    public Collection<Edge> getEdges(Long nodeId) {
+    public ArrayList<Edge> getEdges(long nodeId) {
         return getNode(nodeId).getEdges();
     }
 
-    public Collection<Edge> getEdges(Node node) {
+    public ArrayList<Edge> getEdges(Node node) {
         return getEdges(node.getId());
     }
 

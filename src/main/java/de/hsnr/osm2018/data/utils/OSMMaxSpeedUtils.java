@@ -1,69 +1,57 @@
 package de.hsnr.osm2018.data.utils;
 
+
+import de.hsnr.osm2018.data.graph.Edge;
+import de.hsnr.osm2018.data.graph.EdgeType;
+
 public class OSMMaxSpeedUtils {
 
-    /**
-     * This function converts a number as string, or a specific word as string to a byte.
-     * The string should describe a maximum speed.
-     * All speed limits from 0-100 are supported.
-     * Furthermore the speed limits 110,120,130,140 and 150 can be resolved within one byte. These values are stored like this:
-     * 110 = 101, 120 = 102, 130 = 103, 140 = 104, 150 = 105.
-     * If there is no speed limit the Value 127 (MAX_BYTE) is returned.
-     **/
-    public static byte compressOsmMaxSpeedValueToByte(String maxSpeed) {
-        if(maxSpeed == null) {
-            return -1;
-        }
-
-        byte compressedSpeed;
-        short tmpSpeed;
-
-        try {
-            tmpSpeed = Short.parseShort(maxSpeed);
-            if(tmpSpeed > 100) {
-                compressedSpeed = OSMMaxSpeedUtils.parseToCompactedValue(tmpSpeed);
-            } else {
-                compressedSpeed = (byte) tmpSpeed;
-            }
-        } catch(NumberFormatException ex) {
-            compressedSpeed = OSMMaxSpeedUtils.convertOsmMaxSpeedTagToByte(maxSpeed);
-        }
-
-        return compressedSpeed;
-    }
-
-    private static byte parseToCompactedValue(short tmpSpeed) {
-        if(tmpSpeed < 100 && tmpSpeed % 10 != 0) {
-            return -1;
-        }
-
-        return (byte) (100 + ((tmpSpeed - 100) / 10));
-    }
-
-    public static byte convertOsmMaxSpeedTagToByte(String maxSpeed) {
-        byte compressedMaxSpeed;
-
-        if(maxSpeed.toLowerCase().equals("walk")) {
-            compressedMaxSpeed = 5;
-        } else if(maxSpeed.toLowerCase().equals("none")) {
-            compressedMaxSpeed = Byte.MAX_VALUE;
-        } else {
-            compressedMaxSpeed = -1;
-        }
-
-        return compressedMaxSpeed;
-    }
-
-    public static short convertOsmMaxSpeedTagToShort(String maxSpeed) {
-        short maxSpeedValue;
-        if(maxSpeed.toLowerCase().equals("walk")) {
-            maxSpeedValue = 5;
-        } else if(maxSpeed.toLowerCase().equals("none")) {
-            maxSpeedValue = 130;
+    public static short convertOsmMaxSpeedTagToShort(String maxSpeedTag) {
+        if(maxSpeedTag.equals("walk")) {
+            return 5;
+        } else if(maxSpeedTag.equals("none")) {
+            return 130;
+        } else if(maxSpeedTag.equals("signals")) {
+            return 130;
         }
         else {
-            maxSpeedValue = -1;
+            return 0;
         }
-        return maxSpeedValue;
+    }
+
+    public static short evaluateMaxSpeedByEdgeType(EdgeType mType) {
+        short maxSpeed = 0;
+        if(mType.getName().equals(EdgeType.LIVING_STREET.getName())) {
+            maxSpeed = 30;
+        } else if(mType.getName().equals(EdgeType.MOTORWAY.getName())) {
+            maxSpeed = 130;
+        } else if(mType.getName().equals(EdgeType.MOTORWAY_LINK.getName())) {
+            maxSpeed = 130;
+        } else if(mType.getName().equals(EdgeType.PRIMARY.getName())) {
+            maxSpeed = 80;
+        } else if(mType.getName().equals(EdgeType.PRIMARY_LINK.getName())) {
+            maxSpeed = 80;
+        } else if(mType.getName().equals(EdgeType.RESIDENTIAL.getName())) {
+            maxSpeed = 50;
+        } else if(mType.getName().equals(EdgeType.SECONDARY.getName())) {
+            maxSpeed = 80;
+        } else if(mType.getName().equals(EdgeType.SECONDARY_LINK.getName())) {
+            maxSpeed = 80;
+        } else if(mType.getName().equals(EdgeType.SERVICE.getName())) {
+            maxSpeed = 50;
+        } else if(mType.getName().equals(EdgeType.TERTIARY.getName())) {
+            maxSpeed = 80;
+        } else if(mType.getName().equals(EdgeType.TERTIARY_LINK.getName())) {
+            maxSpeed = 80;
+        } else if(mType.getName().equals(EdgeType.TRUNK.getName())) {
+            maxSpeed = 50;
+        } else if(mType.getName().equals(EdgeType.TRUNK_LINK.getName())) {
+            maxSpeed = 50;
+        } else if(mType.getName().equals(EdgeType.UNCLASSIFIED.getName())) {
+            maxSpeed = 50;
+        } else if(mType.getName().equals(EdgeType.UNKNOWN.getName())) {
+            maxSpeed = 50;
+        }
+        return maxSpeed;
     }
 }
