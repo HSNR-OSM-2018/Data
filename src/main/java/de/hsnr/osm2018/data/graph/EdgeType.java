@@ -1,6 +1,8 @@
 package de.hsnr.osm2018.data.graph;
 
-public enum EdgeType {
+import java.io.Serializable;
+
+public enum EdgeType implements Serializable {
     MOTORWAY("motorway", true),
     MOTORWAY_LINK("motorway_link", true),
     TRUNK("trunk", true),

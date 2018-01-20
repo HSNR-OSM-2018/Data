@@ -4,7 +4,9 @@ import de.hsnr.osm2018.data.utils.OSMMaxSpeedUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Edge {
+import java.io.Serializable;
+
+public class Edge implements Serializable {
 
     private Node mStartNode;
     private Node mDestinationNode;
