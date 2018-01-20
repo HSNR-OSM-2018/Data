@@ -40,4 +40,38 @@ public class EdgeTypeUtils {
         }
         return EdgeType.UNKNOWN;
     }
+
+    public static EdgeType evaluateEdgeTypeById(int id) {
+        switch (id) {
+            case 1:
+                return EdgeType.MOTORWAY;
+            case 2:
+                return EdgeType.MOTORWAY_LINK;
+            case 3:
+                return EdgeType.LIVING_STREET;
+            case 4:
+                return EdgeType.PRIMARY;
+            case 5:
+                return EdgeType.PRIMARY_LINK;
+            case 6:
+                return EdgeType.RESIDENTIAL;
+            case 7:
+                return EdgeType.SECONDARY;
+            case 8:
+                return EdgeType.SECONDARY_LINK;
+            case 9:
+                return EdgeType.TERTIARY;
+            case 10:
+                return EdgeType.TERTIARY_LINK;
+            case 11:
+                return EdgeType.TRUNK;
+            case 12:
+                return EdgeType.TRUNK_LINK;
+            case 13:
+                return EdgeType.SERVICE;
+            case 14:
+                return EdgeType.UNCLASSIFIED;
+        }
+        return EdgeType.UNKNOWN;
+    }
 }

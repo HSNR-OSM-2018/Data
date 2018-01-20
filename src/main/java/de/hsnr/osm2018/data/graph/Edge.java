@@ -1,18 +1,25 @@
 package de.hsnr.osm2018.data.graph;
 
+import de.hsnr.osm2018.data.utils.EdgeTypeUtils;
 import de.hsnr.osm2018.data.utils.OSMMaxSpeedUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
-public class Edge implements Serializable {
+public class Edge {
 
     private Node mStartNode;
     private Node mDestinationNode;
     private int mLength;
     private short mSpeed;
     private EdgeType mType;
+
+    public Edge(Graph graph, DataInputStream dis) throws IOException {
+        this(graph.getNode(dis.readLong()), graph.getNode(dis.readLong()), dis.readInt(), dis.readShort(), EdgeTypeUtils.evaluateEdgeTypeById((int) dis.readShort()));
+    }
 
     public Edge(Node startNode, Node destinationNode, int length, short speed, EdgeType type) {
         this.mStartNode = startNode;
@@ -56,6 +63,14 @@ public class Edge implements Serializable {
         data.put("speed", getSpeed());
         data.put("type", getType().getName());
         return data;
+    }
+
+    public void write(DataOutputStream dos) throws IOException {
+        dos.writeLong(getStartNode().getId());
+        dos.writeLong(getDestinationNode().getId());
+        dos.writeInt(getLength());
+        dos.writeShort(getSpeed());
+        dos.writeShort((short) getType().getId());
     }
 
     @Override

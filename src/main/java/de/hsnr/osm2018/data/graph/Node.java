@@ -4,15 +4,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Node implements Serializable {
+public class Node {
 
     private long mId;
     private double mLatitude;
     private double mLongitude;
     private ArrayList<Edge> mEdges;
+
+    public Node(DataInputStream dis) throws IOException {
+        this(dis.readLong(), dis.readDouble(), dis.readDouble());
+    }
 
     public Node(long id, double latitude, double longitude) {
         this.mId = id;
@@ -64,6 +70,12 @@ public class Node implements Serializable {
         }
         data.put("edges", edges);
         return data;
+    }
+
+    public void write(DataOutputStream dos) throws IOException {
+        dos.writeLong(getId());
+        dos.writeDouble(getLatitude());
+        dos.writeDouble(getLongitude());
     }
 
     @Override

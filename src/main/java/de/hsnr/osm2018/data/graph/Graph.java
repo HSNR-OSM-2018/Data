@@ -4,16 +4,34 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Graph implements Serializable {
+public class Graph {
 
     private HashMap<Long, Node> mNodes;
 
     public Graph() {
         this.mNodes = new HashMap<>();
+    }
+
+    public Graph(DataInputStream dis) throws IOException {
+        this();
+        while (dis.available() > 0) {
+            char type = dis.readChar();
+            switch (type) {
+                case 'n':
+                    add(new Node(dis));
+                    break;
+                case 'e':
+                    Edge edge = new Edge(this, dis);
+                    edge.getStartNode().addEdge(edge);
+                    break;
+            }
+        }
     }
 
     public Graph(HashMap<Long, Node> nodes) {
@@ -26,6 +44,19 @@ public class Graph implements Serializable {
 
     public Node getNode(long id) {
         return mNodes.get(id);
+    }
+
+    public Node getNearest(double latitude, double longitude) {
+        Node res = null;
+        double dist = Double.MAX_VALUE;
+        for (Node node : getNodes().values()) {
+            double localDist = node.getDistance(latitude, longitude);
+            if (localDist < dist) {
+                res = node;
+                dist = localDist;
+            }
+        }
+        return res;
     }
 
     public boolean contains(Node node) {
@@ -62,5 +93,18 @@ public class Graph implements Serializable {
         data.put("nodes", nodes);
         data.put("count", count);
         return data;
+    }
+
+    public void write(DataOutputStream dos) throws IOException {
+        for (Node node : getNodes().values()) {
+            dos.writeChar('n');
+            node.write(dos);
+        }
+        for (Node node : getNodes().values()) {
+            for (Edge edge : node.getEdges()) {
+                dos.writeChar('e');
+                edge.write(dos);
+            }
+        }
     }
 }
