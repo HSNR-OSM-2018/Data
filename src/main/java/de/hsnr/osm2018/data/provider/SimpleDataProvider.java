@@ -1,4 +1,4 @@
-package de.hsnr.osm2018.data.data;
+package de.hsnr.osm2018.data.provider;
 
 import de.hsnr.osm2018.data.graph.Graph;
 
