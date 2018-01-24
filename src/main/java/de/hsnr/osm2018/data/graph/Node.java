@@ -10,11 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Node {
-
-    private double degreesToRadians(double degrees) {
-        return degrees * Math.PI / 180;
-    }
-
     private long mId;
     private double mLatitude;
     private double mLongitude;
@@ -56,7 +51,7 @@ public class Node {
     }
 
 
-    public double getReadDistance(Node node){
+    public double getRealDistance(Node node){
         double R = 6371000; // metres
         double phi1 = Math.toRadians(this.mLatitude);
         double phi2 = Math.toRadians(node.getLatitude());
@@ -80,10 +75,10 @@ public class Node {
      * @return distance in meters
      */
     public double getDistance(double latitude, double longitude) {
-        double distanceLatitude = degreesToRadians(latitude - getLatitude());
-        double distanceLongitude = degreesToRadians(longitude - getLongitude());
+        double distanceLatitude = Math.toRadians(latitude - getLatitude());
+        double distanceLongitude = Math.toRadians(longitude - getLongitude());
 
-        double lat1 = degreesToRadians(getLatitude()), lat2 = degreesToRadians(latitude);
+        double lat1 = Math.toRadians(getLatitude()), lat2 = Math.toRadians(latitude);
         double a = Math.sin(distanceLatitude / 2) * Math.sin(distanceLatitude / 2) + Math.sin(distanceLongitude / 2) * Math.sin(distanceLongitude / 2) * Math.cos(lat1) * Math.cos(lat2);
         return 1000D /* kilometers to meters */ * 6371D /* earth radius */ * 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
