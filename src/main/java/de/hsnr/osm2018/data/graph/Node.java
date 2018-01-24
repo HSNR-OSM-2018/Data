@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 public class Node {
 
+    private double degreesToRadians(double degrees) {
+        return degrees * Math.PI / 180;
+    }
+
     private long mId;
     private double mLatitude;
     private double mLongitude;
@@ -51,8 +55,21 @@ public class Node {
         addEdge(new Edge(this, destination, length, speed, type));
     }
 
+    /**
+     * Calculate the distance between this node and another geo-coordinate identified by latitude and longitude
+     * @see <a href="https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates">Stackoverflow</a>
+     *
+     * @param latitude other point latitude
+     * @param longitude other point longitude
+     * @return distance in meters
+     */
     public double getDistance(double latitude, double longitude) {
-        return Math.sqrt(Math.pow(getLatitude() - latitude, 2) + Math.pow(getLongitude() - longitude, 2));
+        double distanceLatitude = degreesToRadians(latitude - getLatitude());
+        double distanceLongitude = degreesToRadians(longitude - getLongitude());
+
+        double lat1 = degreesToRadians(getLatitude()), lat2 = degreesToRadians(latitude);
+        double a = Math.sin(distanceLatitude / 2) * Math.sin(distanceLatitude / 2) + Math.sin(distanceLongitude / 2) * Math.sin(distanceLongitude / 2) * Math.cos(lat1) * Math.cos(lat2);
+        return 1000D /* kilometers to meters */ * 6371D /* earth radius */ * 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     }
 
     public double getDistance(Node node) {
