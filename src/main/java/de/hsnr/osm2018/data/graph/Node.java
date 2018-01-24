@@ -51,6 +51,21 @@ public class Node {
         addEdge(new Edge(this, destination, length, speed, type));
     }
 
+    public double getReadDistance(Node node){
+        double R = 6371000; // metres
+        double phi1 = Math.toRadians(this.mLatitude);
+        double phi2 = Math.toRadians(node.getLatitude());
+        double phiDelta = Math.toRadians((node.getLatitude() - this.mLatitude));
+        double lambda = Math.toRadians(node.getLongitude()-this.mLongitude);
+
+        double a = Math.sin(phiDelta/2) * Math.sin(phiDelta/2) +
+                Math.cos(phi1) * Math.cos(phi2) *
+                        Math.sin(lambda/2) * Math.sin(lambda/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+        return R * c;
+    }
+
     public double getDistance(double latitude, double longitude) {
         return Math.sqrt(Math.pow(getLatitude() - latitude, 2) + Math.pow(getLongitude() - longitude, 2));
     }
