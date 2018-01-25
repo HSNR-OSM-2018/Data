@@ -46,10 +46,13 @@ public class Graph {
         return mNodes.get(id);
     }
 
-    public Node getNearest(double latitude, double longitude) {
+    public Node getNearest(double latitude, double longitude, boolean requireEdges) {
         Node res = null;
         double dist = Double.MAX_VALUE;
         for (Node node : getNodes().values()) {
+            if (requireEdges && node.getEdges().isEmpty()) {
+                continue;
+            }
             double localDist = node.getDistance(latitude, longitude);
             if (localDist < dist) {
                 res = node;
@@ -57,6 +60,10 @@ public class Graph {
             }
         }
         return res;
+    }
+
+    public Node getNearest(double latitude, double longitude) {
+        return getNearest(latitude, longitude, true);
     }
 
     public boolean contains(Node node) {
