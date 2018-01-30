@@ -74,13 +74,17 @@ public class Node {
      * @return distance in meters
      */
     public double getDistance(double latitude, double longitude) {
-        double distanceLatitude = (latitude - getLatitude()) * 111.3D;
-        double distanceLongitude = (longitude - getLongitude()) * 71.5D;
-        return Math.sqrt((distanceLatitude * distanceLatitude) + (distanceLongitude * distanceLongitude)) * 1000D;
+        return getDistance(latitude, longitude, this.mLatitude, this.mLongitude);
     }
 
     public double getDistance(Node node) {
         return getDistance(node.getLatitude(), node.getLongitude());
+    }
+
+    public static double getDistance(double latitude, double longitude, double latitude2, double longitude2){
+        double distanceLatitude = (latitude - latitude2) * 111.3D;
+        double distanceLongitude = (longitude - longitude2) * 71.5D;
+        return Math.sqrt((distanceLatitude * distanceLatitude) + (distanceLongitude * distanceLongitude)) * 1000D;
     }
 
     public JSONObject toJSON() throws JSONException {
