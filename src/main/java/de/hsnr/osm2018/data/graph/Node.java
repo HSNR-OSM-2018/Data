@@ -68,19 +68,15 @@ public class Node {
 
     /**
      * Calculate the distance between this node and another geo-coordinate identified by latitude and longitude
-     * @see <a href="https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates">Stackoverflow</a>
      *
      * @param latitude other point latitude
      * @param longitude other point longitude
      * @return distance in meters
      */
     public double getDistance(double latitude, double longitude) {
-        double distanceLatitude = Math.toRadians(latitude - getLatitude());
-        double distanceLongitude = Math.toRadians(longitude - getLongitude());
-
-        double lat1 = Math.toRadians(getLatitude()), lat2 = Math.toRadians(latitude);
-        double a = Math.sin(distanceLatitude / 2) * Math.sin(distanceLatitude / 2) + Math.sin(distanceLongitude / 2) * Math.sin(distanceLongitude / 2) * Math.cos(lat1) * Math.cos(lat2);
-        return 1000D /* kilometers to meters */ * 6371D /* earth radius */ * 2D * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distanceLatitude = (latitude - getLatitude()) * 111.3D;
+        double distanceLongitude = (longitude - getLongitude()) * 71.5D;
+        return Math.sqrt((distanceLatitude * distanceLatitude) + (distanceLongitude * distanceLongitude)) * 1000D;
     }
 
     public double getDistance(Node node) {
