@@ -18,8 +18,8 @@ public class FilteredDataProvider extends SimpleDataProvider {
      * @param startLongitude       Longitude of start position
      * @param destinationLatitude  Latitude of destination position
      * @param destinationLongitude Longitude of destination position
-     * @param globalVicinityRange  Tolerance range that will widen the bounding box. value should be interpreted as degree
-     * @param localVicinityRadius  Subset local radius around start- and destination positions. value should be interpreted as degree
+     * @param globalVicinityRange  Tolerance range that will widen the bounding box. value should be interpreted as meters
+     * @param localVicinityRadius  Subset local radius around start- and destination positions. value should be interpreted as meters
      * @return Graph subset of graph with nodes and edges within the bound box
      */
     public Graph getGraph(double startLatitude, double startLongitude, double destinationLatitude, double destinationLongitude, double globalVicinityRange, double localVicinityRadius) {
@@ -65,7 +65,7 @@ public class FilteredDataProvider extends SimpleDataProvider {
      * @param startLongitude       Longitude of start position
      * @param destinationLatitude  Latitude of destination position
      * @param destinationLongitude Longitude of destination position
-     * @param vicinityRange        Tolerance range that will widen the bounding box. value should be interpreted as degree
+     * @param vicinityRange        Tolerance range that will widen the bounding box. value should be interpreted as meters
      * @return Graph subset of graph with nodes and edges within the bound box
      */
     public Graph getGraph(double startLatitude, double startLongitude, double destinationLatitude, double destinationLongitude, double vicinityRange) {
@@ -96,7 +96,7 @@ public class FilteredDataProvider extends SimpleDataProvider {
      *
      * @param pointLatitude  Latitude of center point
      * @param pointLongitude Longitude of center point
-     * @param vicinityRadius Subset radius. value should be interpreted as degree
+     * @param vicinityRadius Subset radius. value should be interpreted as meters
      * @return Graph subset of graph with nodes and edges within the bound circle
      */
     public Graph getGraph(double pointLatitude, double pointLongitude, double vicinityRadius) {
