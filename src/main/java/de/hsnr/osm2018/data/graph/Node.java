@@ -51,17 +51,17 @@ public class Node {
     }
 
 
-    public double getRealDistance(Node node){
+    public double getRealDistance(Node node) {
         double R = 6371000; // metres
         double phi1 = Math.toRadians(this.mLatitude);
         double phi2 = Math.toRadians(node.getLatitude());
         double phiDelta = Math.toRadians((node.getLatitude() - this.mLatitude));
-        double lambda = Math.toRadians(node.getLongitude()-this.mLongitude);
+        double lambda = Math.toRadians(node.getLongitude() - this.mLongitude);
 
-        double a = Math.sin(phiDelta/2) * Math.sin(phiDelta/2) +
+        double a = Math.sin(phiDelta / 2) * Math.sin(phiDelta / 2) +
                 Math.cos(phi1) * Math.cos(phi2) *
-                        Math.sin(lambda/2) * Math.sin(lambda/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                        Math.sin(lambda / 2) * Math.sin(lambda / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return R * c;
     }
@@ -69,19 +69,19 @@ public class Node {
     /**
      * Calculate the distance between this node and another geo-coordinate identified by latitude and longitude
      *
-     * @param latitude other point latitude
+     * @param latitude  other point latitude
      * @param longitude other point longitude
      * @return distance in meters
      */
     public double getDistance(double latitude, double longitude) {
-        return getDistance(latitude, longitude, this.mLatitude, this.mLongitude);
+        return getDistance(this.mLatitude, this.mLongitude, latitude, longitude);
     }
 
     public double getDistance(Node node) {
-        return getDistance(node.getLatitude(), node.getLongitude());
+        return getDistance(this.mLatitude, this.mLongitude, node.getLatitude(), node.getLongitude());
     }
 
-    public static double getDistance(double latitude, double longitude, double latitude2, double longitude2){
+    public static double getDistance(double latitude, double longitude, double latitude2, double longitude2) {
         double distanceLatitude = (latitude - latitude2) * 111.3D;
         double distanceLongitude = (longitude - longitude2) * 71.5D;
         return Math.sqrt((distanceLatitude * distanceLatitude) + (distanceLongitude * distanceLongitude)) * 1000D;
