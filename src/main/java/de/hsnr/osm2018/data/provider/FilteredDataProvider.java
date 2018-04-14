@@ -6,7 +6,6 @@ import de.hsnr.osm2018.data.graph.Graph;
 import de.hsnr.osm2018.data.graph.Node;
 import de.hsnr.osm2018.data.path.PathGraphContainer;
 
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class FilteredDataProvider extends SimpleDataProvider {
